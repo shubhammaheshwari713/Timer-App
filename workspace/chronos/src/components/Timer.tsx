@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useStore, type TimerItem } from '../store'
 import { formatHMS, parseToMs, percent } from '../lib/time'
 import { useTicker } from '../hooks/useTicker'
+import { playSound } from '../lib/sounds'
 import { Play, Square, RotateCcw, Plus, Trash2, Bell } from 'lucide-react'
 
 const PRESETS: { label: string, ms: number }[] = [
@@ -25,11 +26,7 @@ function TimerCard({ item }: { item: TimerItem }) {
       stopTimer(item.id)
       try {
         if (item.sound !== 'silent') {
-          const audio = new Audio(
-            item.sound === 'beep' ? '/beep.mp3' : item.sound === 'bell' ? '/bell.mp3' : '/chime.mp3'
-          )
-          audio.volume = 0.6
-          audio.play().catch(() => {})
+          playSound(item.sound as any).catch(() => {})
         }
         document.body.classList.add('animate-flash')
         setTimeout(() => document.body.classList.remove('animate-flash'), 1500)

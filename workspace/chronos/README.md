@@ -1,69 +1,32 @@
-# React + TypeScript + Vite
+# Chronos — Timer • Stopwatch • Counter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern web app built with React, TypeScript, Vite, Tailwind CSS, and PWA support.
 
-Currently, two official plugins are available:
+Features:
+- Stopwatch: start/stop/reset, laps, CSV export, multiple instances
+- Timer: presets, custom inputs, alerts, notifications, multiple instances
+- Counter: up/down, adjustable speed and step, progress, multiple instances
+- Dark mode, offline-ready, persisted settings (Zustand)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Local development
+1. Install dependencies
+```bash
+npm install
+```
+2. Start dev server
+```bash
+echo http://localhost:5173
+npm run dev
+```
+3. Build
+```bash
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Deploying to GitHub Pages
+1. Create a GitHub repository (e.g. `username/chronos`)
+2. Push the project to the `main` branch
+3. Enable Pages: Settings → Pages → Source: GitHub Actions
+4. On push to `main`, the workflow in `.github/workflows/deploy.yml` builds and deploys `dist/`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The Vite `base` is configured dynamically from `GITHUB_REPOSITORY` for Pages compatibility.
